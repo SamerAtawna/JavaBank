@@ -1,11 +1,10 @@
 package com.bank.GUI;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class Login extends JFrame {
-    JPanel inputPanel = new JPanel(new GridLayout(4,2));
+    JPanel inputPanel = new JPanel(new GridLayout(4, 2));
     JPanel loginMainPanel = new JPanel(new GridLayout(2, 1));
     GridBagConstraints gbc = new GridBagConstraints();
 
@@ -37,7 +36,7 @@ public class Login extends JFrame {
         }
 
 
-space.setPreferredSize(new Dimension(50,50));
+        space.setPreferredSize(new Dimension(50, 50));
         loginMainPanel.add(imagePanel);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -59,7 +58,7 @@ space.setPreferredSize(new Dimension(50,50));
         inputPanel.add(loginButton, gbc);
         gbc.gridx = 1;
         gbc.gridy = 3;
-        inputPanel.add(exitButton,gbc );
+        inputPanel.add(exitButton, gbc);
 
 
         loginMainPanel.add(inputPanel);
@@ -72,6 +71,10 @@ space.setPreferredSize(new Dimension(50,50));
     }
 
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception ignored) {
+        }
         new Login();
     }
 
