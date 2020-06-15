@@ -1,13 +1,18 @@
 package com.bank.GUI;
 
+import Common.ClientThread;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
-public class Login extends JFrame {
+public class Login extends JFrame implements ActionListener {
     JPanel inputPanel = new JPanel(new GridLayout(4, 2));
     JPanel loginMainPanel = new JPanel(new GridLayout(2, 1));
     GridBagConstraints gbc = new GridBagConstraints();
-
+    static ClientThread clientThread;
 
     JPanel imagePanel = new Logo();
     JButton loginButton = new JButton("כניסה");
@@ -20,7 +25,10 @@ public class Login extends JFrame {
     JLabel space = new JLabel("");
 
 
-    public Login() {
+
+
+    public Login(ClientThread clientThread)  {
+        this.clientThread = clientThread;
         inputPanel.setLayout(new GridBagLayout());
         // set nimbus look and feel
         try {
@@ -35,6 +43,8 @@ public class Login extends JFrame {
             System.out.println("Failed theme");
         }
 
+        loginButton.addActionListener(this);
+        exitButton.addActionListener(this);
 
         space.setPreferredSize(new Dimension(50, 50));
         loginMainPanel.add(imagePanel);
@@ -75,7 +85,24 @@ public class Login extends JFrame {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception ignored) {
         }
-        new Login();
+        new Login(clientThread);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = ((JButton) e.getSource()).getActionCommand();
+        System.out.println(command);
+        if(command.equals("כניסה")){
+            System.out.println("login");
+            try {
+                clientThread.auth(this.userName.getText(), this.password.getText());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+        if(command.equals("יציאה")){
+            System.out.println("exit");
+        }
+
+    }
 }

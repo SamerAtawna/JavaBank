@@ -1,24 +1,23 @@
 package com.bank.GUI.Components;
 
+import Classes.Client;
+import Common.ClientThread;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 public class Center extends JPanel {
     JTabbedPane tabs = new JTabbedPane();
-    JPanel clients = new Center_Clients();
-    JPanel dispose = new Center_Dispose();
-    JPanel withdraw = new Center_Withdraw();
-    JPanel transfer = new Center_Transfer();
-    JPanel newClient = new Center_NewClient();
-    public Center(){
+    public Center(ClientThread clientThread) throws IOException {
 
         this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
-        tabs.add(newClient, "לקוח חדש");
-        tabs.add(transfer, "העברה");
-        tabs.add(withdraw, "משיכה");
-        tabs.add(dispose, "הפקדה");
-        tabs.add(clients, "לקוחות");
+        tabs.add(new Center_NewClient(clientThread), "לקוח חדש");
+        tabs.add(new Center_Transfer(clientThread), "העברה");
+        tabs.add(new Center_Withdraw(clientThread), "משיכה");
+        tabs.add(new Center_Dispose(clientThread), "הפקדה");
+        tabs.add(new Center_Clients(clientThread), "לקוחות");
 
         this.add(tabs);
 
