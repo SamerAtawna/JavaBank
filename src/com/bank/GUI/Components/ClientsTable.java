@@ -17,21 +17,6 @@ public class ClientsTable extends JPanel {
     ClientThread clientThread;
     JTable clientsTable;
     DefaultTableModel model;
-    String[] columnNames = {"ת.ז.", "סטטוס", "יתרה", "מספר לקוח", "מספר חשבון", "שם"};
-    String data[][] = {{"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-            {"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-            {"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-            {"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-            {"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-            {"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-            {"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-            {"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-            {"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-            {"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-            {"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-            {"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-            {"026480996", "פעיל", "670000", "123456", "99999", "סאמר אלעטאונה"},
-    };
 
      ClientsTable() throws IOException {
 
@@ -41,8 +26,7 @@ public class ClientsTable extends JPanel {
         clientsTable.setPreferredSize(new Dimension(600, 300));
         model = new DefaultTableModel(new String[]{"קוד אשראי", "מזהה", "ת.ז.", "סטטוס", "יתרה", "מספר חשבון", "שם"}, 0);
         clientsTable.setModel(model);
-//        Object[] dt =  {1234,1234,Enums.Status.ACTIVE,200,333,111,"Samer"};
-//        model.addRow(dt);
+
 
         JScrollPane sp = new JScrollPane(clientsTable);
         sp.setPreferredSize(new Dimension(700, 300));
@@ -55,7 +39,8 @@ public class ClientsTable extends JPanel {
 
     public void setData(ArrayList<Client> data) throws IOException {
         System.out.println("SETDATA ClientsTable");
-
+        State.getInstance().setClients(data);
+        model.setRowCount(0);
         for (int i = 0; i < data.size(); i++) {
 
             String userName = data.get(i).getFullName();
@@ -68,11 +53,15 @@ public class ClientsTable extends JPanel {
 
             Object[] dt = {cardCode,clientAccountID, clientID, status, balance, accountID, userName};
             model.addRow(dt);
+//            State.getInstance().notifyTables();
         }
 
         this.repaint();
         System.out.println("##Row counts" + model.getRowCount());
         model.fireTableDataChanged();
+        State.getInstance().setClientsNumber(model.getRowCount());//Update clients counter
+        Dashboard.getInstance().repaint();
+
 
 
     }

@@ -1,8 +1,10 @@
 package Server;
 
 import Classes.Client;
+import Classes.DisposeBucket;
 import Classes.Enums.Enums;
 import Classes.User;
+import Classes.WithdrawBucket;
 import Common.Request;
 import Common.Response;
 import Server.Database.DB;
@@ -71,6 +73,19 @@ public class ServerThread extends Thread {
                     writer.writeObject(new Response(Enums.ResponseType.CREATE_ACCOUNT, true));
 
                 }
+                if (req.getType().equals(Enums.RequestType.DISPOSE)){
+                    DisposeBucket bucket = (DisposeBucket) req.getContent();
+                    this.dataBase.disponse(bucket.getId(),bucket.getAmount());
+                    writer.writeObject(new Response(Enums.ResponseType.DISPOSE, true));
+
+                }
+                if (req.getType().equals(Enums.RequestType.WITHDRAW)){
+                    WithdrawBucket bucket = (WithdrawBucket) req.getContent();
+                    this.dataBase.withdraw(bucket.getId(),bucket.getAmount());
+                    writer.writeObject(new Response(Enums.ResponseType.WITHDRAW, true));
+
+                }
+
             }
         } catch (IOException e) {
             e.printStackTrace();

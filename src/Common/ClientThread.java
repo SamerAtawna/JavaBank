@@ -4,6 +4,7 @@ import Classes.Client;
 import Classes.Enums.Enums;
 import Classes.User;
 import com.bank.GUI.Components.ClientsTable;
+import com.bank.GUI.Components.State;
 import com.bank.GUI.Dashboard;
 import com.bank.GUI.Login;
 
@@ -14,8 +15,13 @@ import java.util.ArrayList;
 public class ClientThread extends Thread  {
 
     ServerConnection cnt = new ServerConnection("localhost", 5555);
+    private static ClientThread instance = null;
 
     Login login = new Login(this);
+
+    private ClientThread() throws IOException {
+
+    }
 
     @Override
     public void run() {
@@ -41,10 +47,25 @@ public class ClientThread extends Thread  {
                     ArrayList<Client> allClients = (ArrayList<Client>) rsp.getContent();
                     System.out.println(allClients.size());
                     ClientsTable.getInstance().setData(allClients);
+                    com.bank.GUI.Components.State.getInstance().setClients(allClients);
                 }
 
                 if (rsp.getType().equals(Enums.ResponseType.CREATE_ACCOUNT)) {
                     JOptionPane.showMessageDialog(null,"  החשבון נוצר בהצלחה","הודעה", JOptionPane.INFORMATION_MESSAGE);
+                    this.getClients();
+
+                }
+
+                if (rsp.getType().equals(Enums.ResponseType.DISPOSE)) {
+                    JOptionPane.showMessageDialog(null,"  הפקדה בוצעה","הודעה", JOptionPane.INFORMATION_MESSAGE);
+                    this.getClients();
+
+                }
+
+                if (rsp.getType().equals(Enums.ResponseType.WITHDRAW)) {
+                    System.out.println("Repose Cline tWITHDRAW");
+                    JOptionPane.showMessageDialog(null,"משיכה בוצעה בהצלחה","הודעה", JOptionPane.INFORMATION_MESSAGE);
+                    this.getClients();
 
                 }
             }
@@ -68,6 +89,20 @@ public class ClientThread extends Thread  {
 
     public void createAccount(String name, Integer ID, Integer accountNum, float balance, Enums.Status status, Integer cardCode) throws IOException {
         this.cnt.createAccount(name,ID,accountNum,balance,status,cardCode);
+    }
+
+    public static ClientThread getInstance() throws IOException {
+        if (instance == null) {
+            instance = new ClientThread();
+        }
+        return instance;
+    }
+
+    public void dispose(String id, float amount) throws IOException {
+        cnt.dispose(id, amount);
+    }
+    public void withDraw(String id, float amount) throws IOException {
+        cnt.withDraw(id, amount);
     }
 
 

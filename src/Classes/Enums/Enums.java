@@ -15,12 +15,16 @@ public class Enums {
        AUTH_INVALID,
         AUTH_VALID,
         ALL_CLIENTS,
-        CREATE_ACCOUNT
+        CREATE_ACCOUNT,
+        DISPOSE,
+        WITHDRAW
 
     }
     public enum RequestType{
         ALL_CLIENTS,
         AUTHENTICATION,
-        CREATE_ACCOUNT
+        CREATE_ACCOUNT,
+        DISPOSE,
+        WITHDRAW
     }
 }

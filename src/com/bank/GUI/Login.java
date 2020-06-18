@@ -1,6 +1,7 @@
 package com.bank.GUI;
 
 import Common.ClientThread;
+import com.bank.GUI.Components.State;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +28,8 @@ public class Login extends JFrame implements ActionListener {
 
 
 
-    public Login(ClientThread clientThread)  {
+    public Login(ClientThread clientThread) throws IOException {
+        State appState = State.getInstance();
         this.clientThread = clientThread;
         inputPanel.setLayout(new GridBagLayout());
         // set nimbus look and feel
@@ -80,7 +82,7 @@ public class Login extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception ignored) {

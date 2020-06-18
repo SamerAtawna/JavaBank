@@ -4,6 +4,8 @@ import Classes.Client;
 import Common.ClientThread;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +22,17 @@ public class Center extends JPanel {
         tabs.add(new Center_Clients(clientThread), "לקוחות");
 
         this.add(tabs);
+        tabs.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                System.out.println("Tab: " + tabs.getTitleAt(tabs.getSelectedIndex()));
+                try {
+                    //update current view
+                    State.getInstance().setCurrentView(tabs.getTitleAt(tabs.getSelectedIndex()));
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
 
 
 

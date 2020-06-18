@@ -4,9 +4,12 @@ import Common.ClientThread;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Center_Clients extends JPanel {
+
     ClientThread clientThread;
     JLabel numOfClientsLabel = new JLabel("מספר לקוחות");
     Integer numofClients = 0;
@@ -32,5 +35,16 @@ public class Center_Clients extends JPanel {
         this.add(topPanel);
 
         this.add(clientsTable);
+        this.clientsNum.setText(State.getInstance().getClientsNumber());
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                   System.out.println(State.getInstance().getClients().size());
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
     }
 }

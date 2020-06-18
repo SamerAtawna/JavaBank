@@ -1,8 +1,10 @@
 package Common;
 
 import Classes.Client;
+import Classes.DisposeBucket;
 import Classes.Enums.Enums;
 import Classes.User;
+import Classes.WithdrawBucket;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -53,6 +55,20 @@ public class ServerConnection {
     }
     public void createAccount(String name, Integer ID, Integer accountNum, float balance, Enums.Status status , Integer cardCode) throws IOException {
         req = new Request(Enums.RequestType.CREATE_ACCOUNT, new Client(name,accountNum,0,balance,status,ID,cardCode));
+        writer.writeObject(req);
+        writer.flush();
+    }
+
+    public void dispose(String id, float amount) throws IOException {
+        System.out.println("AUTH ServerConnection");
+        req = new Request(Enums.RequestType.DISPOSE, new DisposeBucket(Integer.parseInt(id),amount));
+        writer.writeObject(req);
+        writer.flush();
+    }
+
+    public void withDraw(String id, float amount) throws IOException {
+        System.out.println("WITHDRAW ServerConnection");
+        req = new Request(Enums.RequestType.WITHDRAW, new WithdrawBucket(Integer.parseInt(id),amount));
         writer.writeObject(req);
         writer.flush();
     }
