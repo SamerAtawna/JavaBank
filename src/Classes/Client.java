@@ -23,6 +23,19 @@ public class Client implements Serializable {
         this.clientID = clientID;
         this.cardCode = cardCode;
     }
+    public Client(String userName) {
+        this.fullName = userName;
+    }
+
+    public Client(Integer cardCode) {
+        this.cardCode = cardCode;
+    }
+    public Client(int id, int password){
+        this.clientID = id;
+        this.cardCode=password;
+    }
+
+
 
     public String getFullName() {
         return fullName;

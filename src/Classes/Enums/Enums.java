@@ -17,7 +17,10 @@ public class Enums {
         ALL_CLIENTS,
         CREATE_ACCOUNT,
         DISPOSE,
-        WITHDRAW
+        WITHDRAW,
+        ATM_IDENTIFY,
+        ATM_CHARGE,
+        TRANSACTIONS
 
     }
     public enum RequestType{
@@ -25,6 +28,10 @@ public class Enums {
         AUTHENTICATION,
         CREATE_ACCOUNT,
         DISPOSE,
-        WITHDRAW
+        WITHDRAW,
+        ATM_IDENTIFY,
+        ATM_CHARGE,
+        TRANSACTIONS
+
     }
 }

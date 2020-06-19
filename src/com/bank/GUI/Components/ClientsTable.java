@@ -7,6 +7,8 @@ import Common.ClientThread;
 import com.bank.GUI.Dashboard;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.io.IOException;
@@ -24,7 +26,12 @@ public class ClientsTable extends JPanel {
 
         clientsTable = new JTable();
         clientsTable.setPreferredSize(new Dimension(600, 300));
-        model = new DefaultTableModel(new String[]{"קוד אשראי", "מזהה", "ת.ז.", "סטטוס", "יתרה", "מספר חשבון", "שם"}, 0);
+        model = new DefaultTableModel(new String[]{"קוד אשראי", "מזהה", "ת.ז.", "סטטוס", "יתרה", "מספר חשבון", "שם"}, 0){
+            public boolean isCellEditable(int row, int column)
+            {
+                return false;//This causes all cells to be not editable
+            }
+        };
         clientsTable.setModel(model);
 
 
@@ -33,12 +40,28 @@ public class ClientsTable extends JPanel {
 
         this.setLayout(new FlowLayout(FlowLayout.RIGHT));
         this.add(sp);
+         clientsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+             public void valueChanged(ListSelectionEvent event) {
+                 System.out.println("##FIREC ACTION");
+                 // print first column value from selected row
+               if(clientsTable.getRowCount()>0){
+                   String id = clientsTable.getValueAt(clientsTable.getSelectedRow(), 1).toString();
+                   try {
+                       State.getInstance().setTransClient(Integer.parseInt(id));
 
+                   } catch (IOException e) {
+                       e.printStackTrace();
+                   }
+               }
+
+             }
+         });
 
     }
 
     public void setData(ArrayList<Client> data) throws IOException {
         System.out.println("SETDATA ClientsTable");
+        System.out.println("SETDATA ClientsTable data length "+ data.size());
         State.getInstance().setClients(data);
         model.setRowCount(0);
         for (int i = 0; i < data.size(); i++) {

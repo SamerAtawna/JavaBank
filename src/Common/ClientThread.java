@@ -2,9 +2,11 @@ package Common;
 
 import Classes.Client;
 import Classes.Enums.Enums;
+import Classes.Transaction;
 import Classes.User;
 import com.bank.GUI.Components.ClientsTable;
 import com.bank.GUI.Components.State;
+import com.bank.GUI.Components.Transactions;
 import com.bank.GUI.Dashboard;
 import com.bank.GUI.Login;
 
@@ -24,7 +26,7 @@ public class ClientThread extends Thread  {
     }
 
     @Override
-    public void run() {
+    public  void run() {
 
         try {
             cnt.connect();
@@ -39,7 +41,9 @@ public class ClientThread extends Thread  {
 
                 }else if ( rsp.getType().equals(Enums.ResponseType.AUTH_VALID)){
                     User currUser = (User) rsp.getContent();
-                    new Dashboard(currUser, this);
+                    this.login.dispose();
+                    com.bank.GUI.Components.State.getInstance().setLoggedUser(currUser);
+                    Dashboard ds = Dashboard.getInstance();
 
                 }
                 if (rsp.getType().equals(Enums.ResponseType.ALL_CLIENTS)){
@@ -68,6 +72,13 @@ public class ClientThread extends Thread  {
                     this.getClients();
 
                 }
+
+                if (rsp.getType().equals(Enums.ResponseType.TRANSACTIONS)){
+                    System.out.println("ALL_CLIENS ClientThread");
+                    ArrayList<Transaction> transList = (ArrayList<Transaction>) rsp.getContent();
+                    Transactions.getInstance().setTransData(transList);
+                }
+
             }
 
         } catch (IOException e) {
@@ -86,7 +97,10 @@ public class ClientThread extends Thread  {
         System.out.println("ClientThread getClients");
         this.cnt.getClients();
     }
-
+    public void getTrans(int client) throws IOException {
+        System.out.println("ClientThread getClients");
+        this.cnt.getTrans(client);
+    }
     public void createAccount(String name, Integer ID, Integer accountNum, float balance, Enums.Status status, Integer cardCode) throws IOException {
         this.cnt.createAccount(name,ID,accountNum,balance,status,cardCode);
     }
@@ -102,7 +116,7 @@ public class ClientThread extends Thread  {
         cnt.dispose(id, amount);
     }
     public void withDraw(String id, float amount) throws IOException {
-        cnt.withDraw(id, amount);
+        cnt.withDraw(id, amount, "BANK");
     }
 
 

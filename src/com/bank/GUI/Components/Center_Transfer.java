@@ -17,7 +17,7 @@ public class Center_Transfer extends JPanel {
     JButton transferButton = new JButton("העברה");
     ClientThread clientThread;
 
-    Center_Transfer(ClientThread clientThread) throws IOException {
+    Center_Transfer() throws IOException {
         this.clientThread = clientThread;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         top.add(amountField);

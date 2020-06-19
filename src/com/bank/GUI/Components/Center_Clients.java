@@ -22,7 +22,7 @@ public class Center_Clients extends JPanel {
     JTextField searchTextField = new JTextField(10);
     JPanel clientsTable = ClientsTable.getInstance();
 
-    Center_Clients(ClientThread clientThread) throws IOException {
+    Center_Clients() throws IOException {
         this.clientThread = clientThread;
         this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
         numClientsPanel.add(numOfClientsLabel);

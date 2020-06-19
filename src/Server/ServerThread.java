@@ -1,10 +1,7 @@
 package Server;
 
-import Classes.Client;
-import Classes.DisposeBucket;
+import Classes.*;
 import Classes.Enums.Enums;
-import Classes.User;
-import Classes.WithdrawBucket;
 import Common.Request;
 import Common.Response;
 import Server.Database.DB;
@@ -75,14 +72,30 @@ public class ServerThread extends Thread {
                 }
                 if (req.getType().equals(Enums.RequestType.DISPOSE)){
                     DisposeBucket bucket = (DisposeBucket) req.getContent();
-                    this.dataBase.disponse(bucket.getId(),bucket.getAmount());
+                    this.dataBase.disponse(bucket.getId(),bucket.getAmount(), "BANK");
                     writer.writeObject(new Response(Enums.ResponseType.DISPOSE, true));
 
                 }
                 if (req.getType().equals(Enums.RequestType.WITHDRAW)){
                     WithdrawBucket bucket = (WithdrawBucket) req.getContent();
-                    this.dataBase.withdraw(bucket.getId(),bucket.getAmount());
+                    this.dataBase.withdraw(bucket.getId(),bucket.getAmount(), bucket.getLocation());
                     writer.writeObject(new Response(Enums.ResponseType.WITHDRAW, true));
+
+                }       if (req.getType().equals(Enums.RequestType.ATM_IDENTIFY)){
+                    Client user = (Client) req.getContent();
+                    Client tryUser = this.dataBase.atmAuth(user.getCardCode());
+                    writer.writeObject(new Response(Enums.ResponseType.ATM_IDENTIFY, tryUser));
+                }
+                if (req.getType().equals(Enums.RequestType.ATM_CHARGE)){
+                    WithdrawBucket bucket = (WithdrawBucket) req.getContent();
+                    this.dataBase.withdraw(bucket.getId(),bucket.getAmount(), bucket.getLocation());
+                    writer.writeObject(new Response(Enums.ResponseType.ATM_CHARGE, true));
+
+                }
+                if (req.getType().equals(Enums.RequestType.TRANSACTIONS)){
+                    Client client = (Client) req.getContent();
+                    ArrayList<Transaction> transList =  this.dataBase.getTransactions(client.getClientID());
+                    writer.writeObject(new Response(Enums.ResponseType.TRANSACTIONS, transList));
 
                 }
 
@@ -93,6 +106,8 @@ public class ServerThread extends Thread {
             e.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
     }

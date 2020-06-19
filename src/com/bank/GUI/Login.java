@@ -82,14 +82,6 @@ public class Login extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) throws IOException {
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (Exception ignored) {
-        }
-        new Login(clientThread);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = ((JButton) e.getSource()).getActionCommand();
@@ -97,7 +89,7 @@ public class Login extends JFrame implements ActionListener {
         if(command.equals("כניסה")){
             System.out.println("login");
             try {
-                clientThread.auth(this.userName.getText(), this.password.getText());
+                ClientThread.getInstance().auth(this.userName.getText(), this.password.getText());
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }

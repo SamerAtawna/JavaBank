@@ -1,6 +1,7 @@
 package com.bank.GUI.Components;
 
 import Classes.Client;
+import Classes.User;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -14,7 +15,24 @@ public class State {
     public ArrayList<ClientsTable_Helper> tableHelperList = new ArrayList<>();
     public  JTextField disposeToRef;
     public  JTextField withDrawRef;
+    int transClient;
+    User loggedUser;
 
+    public User getLoggedUser() {
+        return loggedUser;
+    }
+
+    public void setLoggedUser(User loggedUser) {
+        this.loggedUser = loggedUser;
+    }
+
+    public int getTransClient() {
+        return transClient;
+    }
+
+    public void setTransClient(int transClient) {
+        this.transClient = transClient;
+    }
 
     public String getCurrentView() {
         return currentView;

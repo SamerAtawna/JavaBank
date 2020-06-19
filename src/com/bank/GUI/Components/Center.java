@@ -12,14 +12,14 @@ import java.io.IOException;
 
 public class Center extends JPanel {
     JTabbedPane tabs = new JTabbedPane();
-    public Center(ClientThread clientThread) throws IOException {
+    public Center() throws IOException {
 
         this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
-        tabs.add(new Center_NewClient(clientThread), "לקוח חדש");
-        tabs.add(new Center_Transfer(clientThread), "העברה");
-        tabs.add(new Center_Withdraw(clientThread), "משיכה");
-        tabs.add(new Center_Dispose(clientThread), "הפקדה");
-        tabs.add(new Center_Clients(clientThread), "לקוחות");
+        tabs.add(new Center_NewClient(), "לקוח חדש");
+        tabs.add(new Center_Transfer(), "העברה");
+        tabs.add(new Center_Withdraw(), "משיכה");
+        tabs.add(new Center_Dispose(), "הפקדה");
+        tabs.add(new Center_Clients(), "לקוחות");
 
         this.add(tabs);
         tabs.addChangeListener(new ChangeListener() {

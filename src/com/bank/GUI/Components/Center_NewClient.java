@@ -32,7 +32,7 @@ public class Center_NewClient extends JPanel {
 
     JButton submit = new JButton("יצירת חשבון");
 
-    Center_NewClient(ClientThread clientThread){
+    Center_NewClient(){
         this.clientThread = clientThread;
         this.setLayout(new FlowLayout(FlowLayout.RIGHT));
         accountStatus.add(statusActive);
@@ -87,7 +87,7 @@ public class Center_NewClient extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("CreateAccount Button");
                 try {
-                    clientThread.createAccount(nameTextField.getText(),
+                    ClientThread.getInstance().createAccount(nameTextField.getText(),
                             Integer.parseInt(idTextField.getText()),
                             Integer.parseInt(accountTextField.getText()),
                             Float.parseFloat(balanceTextField.getText()),

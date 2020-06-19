@@ -6,6 +6,21 @@ package Classes;
 public class WithdrawBucket implements Serializable {
     int id;
     float amount;
+    String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public WithdrawBucket(int id, float amount, String location) {
+        this.id = id;
+        this.amount = amount;
+        this.location = location;
+    }
 
     public WithdrawBucket(int id, float amount) {
         this.id = id;

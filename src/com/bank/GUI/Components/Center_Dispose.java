@@ -17,7 +17,7 @@ public class Center_Dispose  extends JPanel {
     JLabel clientLabel = new JLabel("עבור");
     JTextField clientTextField = new JTextField(10);
     ClientThread clientThread;
-    Center_Dispose(ClientThread clientThread) throws IOException {
+    Center_Dispose() throws IOException {
         this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
         this.setSize(new Dimension(600,500));
         top.add(withdrawTextField);
@@ -33,6 +33,10 @@ public class Center_Dispose  extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    if(clientTextField.getText().equals("") || withdrawTextField.getText().equals("")){
+                        JOptionPane.showMessageDialog(null,"יש לוודא את הנתונים","שגיאה", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
                     ClientThread.getInstance().dispose(clientTextField.getText(),Float.parseFloat(withdrawTextField.getText()));
                 } catch (IOException ioException) {
                     ioException.printStackTrace();

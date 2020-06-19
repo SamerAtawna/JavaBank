@@ -39,7 +39,6 @@ public class ClientsTable_Helper extends JPanel {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println("Reading SMTP Info.");
             }
         };
 
