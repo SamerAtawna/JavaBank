@@ -37,7 +37,7 @@ public class ServerConnection {
     }
 
     public void auth(String userName, String password) throws IOException {
-        System.out.println("AUTH ServerConnection");
+        System.out.println("AUTH ServerConnection details : "+userName + " "+ password );
         req = new Request(Enums.RequestType.AUTHENTICATION, new User(userName, password, "0", Enums.Permission.USER));
         writer.writeObject(req);
         writer.flush();

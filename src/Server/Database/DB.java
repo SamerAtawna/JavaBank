@@ -25,7 +25,7 @@ public class DB {
         ArrayList users = new ArrayList();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("select * from users");
-        while (rs.next()) {
+        while (rs.next()) { //return row
             if (rs.getString("Permission").equals("Admin")) {
                 System.out.println("tru1");
                 users.add(new User(rs.getString("UserName"), rs.getString("Password"), "0", Enums.Permission.ADMIN));
@@ -74,13 +74,15 @@ public class DB {
 
             }
             if (rs.getString("Status").equals("INACTIVE")) {
-                clients.add(new Client(rs.getString("FullName"),
-                        rs.getInt("AccountNumber"),
-                        rs.getInt("ID"),
-                        rs.getFloat("Balance"),
-                        Enums.Status.INACTIVE,
-                        rs.getInt("ClientID"),
-                        rs.getInt("CardCode")));
+                clients.add(
+                        new Client(rs.getString("FullName"),
+                                rs.getInt("AccountNumber"),
+                                rs.getInt("ID"),
+                                rs.getFloat("Balance"),
+                                Enums.Status.INACTIVE,
+                                rs.getInt("ClientID"),
+                                rs.getInt("CardCode"))
+                );
 
             }
         }
@@ -128,7 +130,7 @@ public class DB {
         Date d = new Date(ctm);
         LocalDate localDate = d.toLocalDate();
         Date sqldate = Date.valueOf(localDate);
-        System.out.println("id "+id +"amount: "+amount+"location "+location);
+        System.out.println("id " + id + "amount: " + amount + "location " + location);
         System.out.println("$$$Withdraw Thread");
         Thread.sleep(2000);
         System.out.println("Done Sleep");
