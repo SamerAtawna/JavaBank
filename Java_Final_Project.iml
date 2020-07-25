@@ -17,5 +17,10 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="mysql:mysql-connector-java:8.0.11" level="project" />
+    <orderEntry type="library" name="com.itextpdf:itext-xtra:5.5.10" level="project" />
+    <orderEntry type="library" name="ch.codeblock.qrinvoice.itext5:qrinvoice-itext5:1.5" level="project" />
+    <orderEntry type="library" name="org.apache.pdfbox:pdfbox:2.0.5" level="project" />
+    <orderEntry type="library" name="com.github.vandeseer:easytable:0.6.0" level="project" />
+    <orderEntry type="library" name="org.json:json:20200518" level="project" />
   </component>
 </module>

@@ -105,6 +105,31 @@ public class DB {
 
     }
 
+    public void createNewUser(User user) throws SQLException {
+        String query = " insert into users (`UserName`, `Permission`, `Password`)"
+                + " values (?, ?, ?)";
+
+
+        PreparedStatement preparedStmt = con.prepareStatement(query);
+        preparedStmt.setString(1, user.getUserName());
+        if(user.getPermission().equals(Enums.Permission.USER)){
+            preparedStmt.setString(2, "User");
+        }
+        if(user.getPermission().equals(Enums.Permission.ADMIN)){
+            preparedStmt.setString(2, "Admin");
+        }
+
+        preparedStmt.setString(3, user.getPassword());
+        try {
+            preparedStmt.execute();
+        } catch (SQLException err) {
+            System.out.println("Query failed .. " + err.getLocalizedMessage());
+
+        }
+
+
+    }
+
     public synchronized void disponse(Integer id, float amount, String location) throws SQLException {
         long ctm = System.currentTimeMillis();
         Date d = new Date(ctm);

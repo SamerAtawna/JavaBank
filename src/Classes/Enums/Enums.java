@@ -20,7 +20,8 @@ public class Enums {
         WITHDRAW,
         ATM_IDENTIFY,
         ATM_CHARGE,
-        TRANSACTIONS
+        TRANSACTIONS,
+        NEW_USER
 
     }
     public enum RequestType{
@@ -31,7 +32,8 @@ public class Enums {
         WITHDRAW,
         ATM_IDENTIFY,
         ATM_CHARGE,
-        TRANSACTIONS
+        TRANSACTIONS,
+        NEW_USER
 
     }
 }

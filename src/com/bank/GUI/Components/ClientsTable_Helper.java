@@ -56,6 +56,10 @@ public class ClientsTable_Helper extends JPanel {
                 // print first column value from selected row
                 String id = clientsTable.getValueAt(clientsTable.getSelectedRow(), 1).toString();
                 try {
+                    if (State.getInstance().getCurrentView().equals("ממשק ניהול")){
+                        State.getInstance().setSelectedClient(id);
+
+                    }
                     if (State.getInstance().getCurrentView().equals("הפקדה")){
                         State.getInstance().disposeToRef.setText(id);
                     }else{

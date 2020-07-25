@@ -1,0 +1,61 @@
+@startuml
+
+title __GUI's Class Diagram__\n
+
+  namespace com.bank.GUI {
+    class com.bank.GUI.Client_Controller {
+        {static} + main()
+    }
+  }
+  
+
+  namespace com.bank.GUI {
+    class com.bank.GUI.Dashboard {
+        {static} ~ currUser : User
+        ~ mainPanel : JPanel
+        {static} - instance : Dashboard
+        + Dashboard()
+        {static} + getInstance()
+    }
+  }
+  
+
+  namespace com.bank.GUI {
+    class com.bank.GUI.Login {
+        {static} ~ clientThread : ClientThread
+        ~ exitButton : JButton
+        ~ gbc : GridBagConstraints
+        ~ imagePanel : JPanel
+        ~ inputPanel : JPanel
+        ~ loginButton : JButton
+        ~ loginMainPanel : JPanel
+        ~ passLabel : JLabel
+        ~ password : JTextField
+        ~ space : JLabel
+        ~ userLabel : JLabel
+        ~ userName : JTextField
+        + Login()
+        + actionPerformed()
+    }
+  }
+  
+
+  namespace com.bank.GUI {
+    class com.bank.GUI.Logo {
+        - image : BufferedImage
+        + Logo()
+        # paintComponent()
+    }
+  }
+  
+
+  com.bank.GUI.Dashboard -up-|> javax.swing.JFrame
+  com.bank.GUI.Login .up.|> java.awt.event.ActionListener
+  com.bank.GUI.Login -up-|> javax.swing.JFrame
+  com.bank.GUI.Logo -up-|> javax.swing.JPanel
+
+
+
+
+
+@enduml

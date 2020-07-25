@@ -1,0 +1,72 @@
+@startuml
+
+title __COMMON's Class Diagram__\n
+
+  namespace Common {
+    class Common.ClientThread {
+        {static} - instance : ClientThread
+        + auth()
+        + createAccount()
+        + dispose()
+        + getClients()
+        {static} + getInstance()
+        + getTrans()
+        + run()
+        + withDraw()
+        - ClientThread()
+    }
+  }
+  
+
+  namespace Common {
+    class Common.Request {
+        - content : Serializable
+        + Request()
+        + Request()
+        + getContent()
+        + getType()
+    }
+  }
+  
+
+  namespace Common {
+    class Common.Response {
+        - content : Serializable
+        - error : boolean
+        + Response()
+        + getContent()
+        + getType()
+    }
+  }
+  
+
+  namespace Common {
+    class Common.ServerConnection {
+        - host : String
+        - port : int
+        - reader : ObjectInputStream
+        - socket : Socket
+        - writer : ObjectOutputStream
+        + ServerConnection()
+        + auth()
+        + connect()
+        + createAccount()
+        + dispose()
+        + getClients()
+        + getRespone()
+        + getTrans()
+        + withDraw()
+    }
+  }
+  
+
+  Common.ClientThread o-- Common.ServerConnection : cnt
+  Common.Request .up.|> java.io.Serializable
+  Common.Request o-- Classes.Enums.Enums.RequestType : type
+  Common.Response .up.|> java.io.Serializable
+  Common.Response o-- Classes.Enums.Enums.ResponseType : type
+  Common.ServerConnection o-- Common.Request : req
+
+
+
+@enduml

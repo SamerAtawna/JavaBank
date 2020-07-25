@@ -57,4 +57,15 @@ public class Transaction implements Serializable {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "clientID=" + clientID +
+                ", Action='" + Action + '\'' +
+                ", amount=" + amount +
+                ", date=" + date +
+                ", location='" + location + '\'' +
+                '}';
+    }
 }

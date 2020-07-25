@@ -1,6 +1,7 @@
 package com.bank.GUI.Components;
 
 import Classes.Client;
+import Classes.Transaction;
 import Classes.User;
 
 import javax.swing.*;
@@ -17,6 +18,25 @@ public class State {
     public  JTextField withDrawRef;
     int transClient;
     User loggedUser;
+
+    public String getSelectedClient() {
+        return selectedClient;
+    }
+
+    public void setSelectedClient(String selectedClient) {
+        this.selectedClient = selectedClient;
+    }
+
+    String selectedClient;
+    ArrayList<Transaction> transList;
+
+    public ArrayList<Transaction> getTransList() {
+        return transList;
+    }
+
+    public void setTransList(ArrayList<Transaction> transList) {
+        this.transList = transList;
+    }
 
     public User getLoggedUser() {
         return loggedUser;
@@ -64,12 +84,16 @@ public class State {
         this.disposeToRef = disposeToRef;
     }
 
-    public String getClientsNumber() {
+    public String getClientsNumber() throws InterruptedException {
+        System.out.println("clients num "+ clientsNumber);
         return  String.valueOf(clientsNumber);
     }
 
     public void setClientsNumber(int clientsNumber) {
+
+    System.out.println("set clients num "+clientsNumber);
         this.clientsNumber = clientsNumber;
+
     }
 
     public static State getInstance() throws IOException {
@@ -83,8 +107,9 @@ public class State {
         return clients;
     }
 
-    public void setClients(ArrayList<Client> clients) {
+    public void setClients(ArrayList<Client> clients) throws IOException {
         this.clients = clients;
+        Center_Transfer.getInstance().repaint();
         System.out.println("State CLientsSet");
     }
 

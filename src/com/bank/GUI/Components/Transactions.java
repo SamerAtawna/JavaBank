@@ -52,7 +52,7 @@ public class Transactions extends JFrame {
         this.setVisible(true);
     }
 
-    public void setTransData(ArrayList<Transaction> data) throws IOException {
+    public void setTransData(ArrayList<Transaction> data) throws IOException, InterruptedException {
         System.out.println("SETDATA Transactions");
         model.setRowCount(0);
         for (int i = 0; i < data.size(); i++) {

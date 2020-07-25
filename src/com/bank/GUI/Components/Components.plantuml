@@ -1,0 +1,251 @@
+@startuml
+
+title __COMPONENTS's Class Diagram__\n
+
+  namespace com.bank.GUI {
+    namespace Components {
+      class com.bank.GUI.Components.Bottom {
+          ~ calc : JButton
+          ~ icon : ImageIcon
+          ~ icon2 : ImageIcon
+          ~ trans : JButton
+          + Bottom()
+      }
+    }
+  }
+  
+
+  namespace com.bank.GUI {
+
+      class com.bank.GUI.Components.Center {
+          ~ tabs : JTabbedPane
+          + Center()
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      class com.bank.GUI.Components.Center_Clients {
+          ~ clientsNum : JLabel
+          ~ clientsTable : JPanel
+          ~ numClientsPanel : JPanel
+          ~ numOfClientsLabel : JLabel
+          ~ numofClients : Integer
+          ~ searchButton : JButton
+          ~ searchLabel : JLabel
+          ~ searchPanel : JPanel
+          ~ searchTextField : JTextField
+          ~ topPanel : JPanel
+          ~ Center_Clients()
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      class com.bank.GUI.Components.Center_Dispose {
+          ~ clientLabel : JLabel
+          ~ clientTextField : JTextField
+          ~ top : JPanel
+          ~ withdrawButton : JButton
+          ~ withdrawLabel : JLabel
+          ~ withdrawTextField : JTextField
+          ~ Center_Dispose()
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+      class com.bank.GUI.Components.Center_NewClient {
+          ~ accountLabel : JLabel
+          ~ accountStatus : ButtonGroup
+          ~ accountTextField : JTextField
+          ~ balanceLabel : JLabel
+          ~ balanceTextField : JTextField
+          ~ cardCodeLabel : JLabel
+          ~ cardCodeTextField : JTextField
+          ~ formPanel : JPanel
+          ~ fullNameLabel : JLabel
+          ~ gbc : GridBagConstraints
+          ~ idLabel : JLabel
+          ~ idTextField : JTextField
+          ~ nameTextField : JTextField
+          ~ statusActive : JRadioButton
+          ~ statusDisabled : JRadioButton
+          ~ statusLabel : JLabel
+          ~ submit : JButton
+          ~ Center_NewClient()
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      class com.bank.GUI.Components.Center_Transfer {
+          ~ amountField : JTextField
+          ~ amountLabel : JLabel
+          ~ fromField : JTextField
+          ~ fromLabel : JLabel
+          ~ toField : JTextField
+          ~ toLabel : JLabel
+          ~ top : JPanel
+          ~ transferButton : JButton
+          ~ Center_Transfer()
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      class com.bank.GUI.Components.Center_Withdraw {
+          ~ clientLabel : JLabel
+          ~ clientTextField : JTextField
+          ~ top : JPanel
+          ~ withdrawButton : JButton
+          ~ withdrawLabel : JLabel
+          ~ withdrawTextField : JTextField
+          ~ Center_Withdraw()
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      class com.bank.GUI.Components.ClientsTable {
+          ~ clientsTable : JTable
+          ~ model : DefaultTableModel
+          {static} - instance : ClientsTable
+          {static} + getInstance()
+          + setData()
+          ~ ClientsTable()
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      class com.bank.GUI.Components.ClientsTable_Helper {
+          ~ clientsTable : JTable
+          ~ model : DefaultTableModel
+          + setData()
+          ~ ClientsTable_Helper()
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      class com.bank.GUI.Components.LogoSmall {
+          - image : BufferedImage
+          + LogoSmall()
+          # paintComponent()
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      class com.bank.GUI.Components.State {
+          + disposeToRef : JTextField
+          + tableHelperList : ArrayList<ClientsTable_Helper>
+          + withDrawRef : JTextField
+          ~ clients : ArrayList<Client>
+          ~ clientsNumber : int
+          ~ currentView : String
+          ~ disposeTo : String
+          ~ transClient : int
+          {static} - instance : State
+          + getClients()
+          + getClientsNumber()
+          + getCurrentView()
+          + getDisposeTo()
+          + getDisposeToRef()
+          {static} + getInstance()
+          + getLoggedUser()
+          + getTransClient()
+          + getWithDrawRef()
+          + notifyTables()
+          + setClients()
+          + setClientsNumber()
+          + setCurrentView()
+          + setDisposeTo()
+          + setDisposeToRef()
+          + setLoggedUser()
+          + setTransClient()
+          + setWithDrawRef()
+          - State()
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      class com.bank.GUI.Components.Top {
+          ~ gbc : GridBagConstraints
+          ~ loggedUserLabel : JLabel
+          ~ loggedUsername : JLabel
+          ~ permission : JLabel
+          ~ permissionLabel : JLabel
+          ~ smallLogo : JPanel
+          ~ time : JPanel
+          ~ timeLabel : JLabel
+          ~ timeLogin : JLabel
+          ~ timeLoginLabel : JLabel
+          ~ userContainer : JPanel
+          ~ userPanel : JPanel
+          + Top()
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      class com.bank.GUI.Components.Transactions {
+          ~ model : DefaultTableModel
+          ~ transactions : JTable
+          {static} - instance : Transactions
+          {static} + getInstance()
+          + setTransData()
+          ~ Transactions()
+      }
+
+  }
+  
+
+  com.bank.GUI.Components.Bottom -up-|> javax.swing.JPanel
+  com.bank.GUI.Components.Center -up-|> javax.swing.JPanel
+  com.bank.GUI.Components.Center_Clients -up-|> javax.swing.JPanel
+  com.bank.GUI.Components.Center_Clients o-- Common.ClientThread : clientThread
+  com.bank.GUI.Components.Center_Dispose -up-|> javax.swing.JPanel
+  com.bank.GUI.Components.Center_Dispose o-- Common.ClientThread : clientThread
+  com.bank.GUI.Components.Center_NewClient -up-|> javax.swing.JPanel
+  com.bank.GUI.Components.Center_NewClient o-- Common.ClientThread : clientThread
+  com.bank.GUI.Components.Center_Transfer -up-|> javax.swing.JPanel
+  com.bank.GUI.Components.Center_Transfer o-- Common.ClientThread : clientThread
+  com.bank.GUI.Components.Center_Withdraw -up-|> javax.swing.JPanel
+  com.bank.GUI.Components.Center_Withdraw o-- Common.ClientThread : clientThread
+  com.bank.GUI.Components.ClientsTable -up-|> javax.swing.JPanel
+  com.bank.GUI.Components.ClientsTable o-- Common.ClientThread : clientThread
+  com.bank.GUI.Components.ClientsTable_Helper -up-|> javax.swing.JPanel
+  com.bank.GUI.Components.ClientsTable_Helper o-- Common.ClientThread : clientThread
+  com.bank.GUI.Components.LogoSmall -up-|> javax.swing.JPanel
+  com.bank.GUI.Components.State o-- Classes.User : loggedUser
+  com.bank.GUI.Components.Top -up-|> javax.swing.JPanel
+  com.bank.GUI.Components.Top o-- Classes.User : currUser
+  com.bank.GUI.Components.Transactions -up-|> javax.swing.JFrame
+
+
+
+@enduml

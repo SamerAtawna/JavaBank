@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="ch.codeblock.qrinvoice.itext5:qrinvoice-itext5:1.5" type="repository">
+    <properties maven-id="ch.codeblock.qrinvoice.itext5:qrinvoice-itext5:1.5" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/qrinvoice-itext5-1.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/itextpdf-5.5.13.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -17,7 +17,7 @@ public class Dashboard extends JFrame {
 
 
     JPanel mainPanel = new JPanel(new BorderLayout());
-    public Dashboard() throws IOException {
+    public Dashboard() throws IOException, InterruptedException {
         System.out.println("## DASHBOARD CONSTRUCT");
         this.currUser = State.getInstance().getLoggedUser();
 
@@ -32,7 +32,7 @@ public class Dashboard extends JFrame {
         this.pack();
         this.setVisible(true);
     }
-    public static Dashboard getInstance() throws IOException {
+    public static Dashboard getInstance() throws IOException, InterruptedException {
         if(instance==null){
             instance = new Dashboard();
         }

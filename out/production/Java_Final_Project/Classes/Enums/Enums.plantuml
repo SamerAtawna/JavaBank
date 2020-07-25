@@ -1,0 +1,65 @@
+@startuml
+
+title __ENUMS's Class Diagram__\n
+
+
+  
+
+
+    namespace Enums {
+      enum Permission {
+        ADMIN
+        USER
+      }
+    }
+
+  
+
+
+    namespace Enums {
+      enum RequestType {
+        ALL_CLIENTS
+        ATM_CHARGE
+        ATM_IDENTIFY
+        AUTHENTICATION
+        CREATE_ACCOUNT
+        DISPOSE
+        TRANSACTIONS
+        WITHDRAW
+      }
+    }
+
+  
+
+
+    namespace Enums {
+      enum ResponseType {
+        ALL_CLIENTS
+        ATM_CHARGE
+        ATM_IDENTIFY
+        AUTH_INVALID
+        AUTH_VALID
+        CREATE_ACCOUNT
+        DISPOSE
+        TRANSACTIONS
+        WITHDRAW
+      }
+    }
+
+  
+
+
+    namespace Enums {
+      enum Status {
+        ACTIVE
+        INACTIVE
+      }
+    }
+
+
+
+
+
+
+
+@enduml

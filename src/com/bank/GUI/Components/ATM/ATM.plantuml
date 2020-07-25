@@ -1,0 +1,82 @@
+@startuml
+
+title __ATM's Class Diagram__\n
+
+  namespace com.bank.GUI {
+
+      namespace ATM {
+        class com.bank.GUI.Components.ATM.ATM {
+            ~ atmPanel : JPanel
+            ~ continueBtn : JButton
+            ~ enterCode : JLabel
+            ~ gbc : GridBagConstraints
+            ~ gbc2 : GridBagConstraints
+            ~ inputCode : JTextField
+            ~ moneyPanel : JPanel
+            ~ oneHundred : JButton
+            ~ serverMessage : JLabel
+            ~ twoHundred : JButton
+            + next()
+            + setServerMessage()
+            ~ ATM()
+        }
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      namespace ATM {
+        class com.bank.GUI.Components.ATM.ATM_Connection {
+            - host : String
+            - port : int
+            - reader : ObjectInputStream
+            - socket : Socket
+            - writer : ObjectOutputStream
+            + ATM_Connection()
+            + checkCard()
+            + connect()
+            + getRespone()
+            + withDraw()
+        }
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      namespace ATM {
+        class com.bank.GUI.Components.ATM.ATM_Controller {
+            {static} + main()
+        }
+      }
+
+  }
+  
+
+  namespace com.bank.GUI {
+
+      namespace ATM {
+        class com.bank.GUI.Components.ATM.ATM_Thread {
+            {static} - instance : ATM_Thread
+            + checkCard()
+            {static} + getInstance()
+            + run()
+            + withDraw()
+        }
+      }
+
+  }
+  
+
+  com.bank.GUI.Components.ATM.ATM -up-|> javax.swing.JFrame
+  com.bank.GUI.Components.ATM.ATM o-- Classes.Client : loggedClient
+  com.bank.GUI.Components.ATM.ATM_Connection o-- Common.Request : req
+  com.bank.GUI.Components.ATM.ATM_Thread o-- com.bank.GUI.Components.ATM.ATM : atm
+  com.bank.GUI.Components.ATM.ATM_Thread o-- com.bank.GUI.Components.ATM.ATM_Connection : cnt
+
+
+
+@enduml

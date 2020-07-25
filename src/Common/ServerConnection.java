@@ -43,11 +43,22 @@ public class ServerConnection {
         writer.flush();
     }
 
-    public void getClients() throws IOException {
-        System.out.println("getClients ServerConnection");
-        req = new Request(Enums.RequestType.ALL_CLIENTS, true);
-        writer.writeObject(req);
-        writer.flush();
+    public synchronized void getClients() throws IOException {
+        new Thread(() -> {
+            System.out.println("getClients ServerConnection");
+            req = new Request(Enums.RequestType.ALL_CLIENTS, true);
+            try {
+                writer.writeObject(req);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                writer.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
 
     }
 
@@ -56,6 +67,14 @@ public class ServerConnection {
         writer.writeObject(req);
         writer.flush();
     }
+
+    public void createUser(User newUser) throws IOException {
+        System.out.println("Sending new user.... "+newUser.toString());
+        req = new Request(Enums.RequestType.NEW_USER, newUser);
+        writer.writeObject(req);
+        writer.flush();
+    }
+
 
     public void dispose(String id, float amount) throws IOException {
         System.out.println("AUTH ServerConnection");

@@ -1,0 +1,127 @@
+@startuml
+
+title __CLASSES's Class Diagram__\n
+
+  namespace Classes {
+    class Classes.Client {
+        - accountNumber : Integer
+        - balance : float
+        - cardCode : Integer
+        - clientAccountID : Integer
+        - clientID : Integer
+        - fullName : String
+        + Client()
+        + Client()
+        + Client()
+        + Client()
+        + getAccountNumber()
+        + getBalance()
+        + getCardCode()
+        + getClientAccountID()
+        + getClientID()
+        + getFullName()
+        + getStatus()
+        + setAccountNumber()
+        + setBalance()
+        + setCardCode()
+        + setClientAccountID()
+        + setClientID()
+        + setFullName()
+        + setStatus()
+    }
+  }
+  
+
+  namespace Classes {
+    class Classes.DisposeBucket {
+        ~ amount : float
+        ~ id : int
+        ~ location : String
+        + DisposeBucket()
+        + DisposeBucket()
+        + getAmount()
+        + getId()
+        + getLocation()
+        + setAmount()
+        + setId()
+        + setLocation()
+    }
+  }
+  
+
+  namespace Classes {
+    class Classes.Transaction {
+        ~ Action : String
+        ~ amount : float
+        ~ clientID : int
+        ~ date : Date
+        ~ location : String
+        + Transaction()
+        + getAction()
+        + getAmount()
+        + getClientID()
+        + getDate()
+        + getLocation()
+        + setAction()
+        + setAmount()
+        + setClientID()
+        + setDate()
+        + setLocation()
+    }
+  }
+  
+
+  namespace Classes {
+    class Classes.User {
+        - lastLogin : String
+        - password : String
+        - userName : String
+        + User()
+        + User()
+        + getLastLogin()
+        + getPassword()
+        + getPermission()
+        + getUserName()
+        + setLastLogin()
+        + setPassword()
+        + setPermission()
+        + setUserName()
+    }
+  }
+  
+
+  namespace Classes {
+    class Classes.WithdrawBucket {
+        ~ amount : float
+        ~ id : int
+        ~ location : String
+        + WithdrawBucket()
+        + WithdrawBucket()
+        + getAmount()
+        + getId()
+        + getLocation()
+        + setAmount()
+        + setId()
+        + setLocation()
+    }
+  }
+  
+
+  namespace Classes {
+    class Classes.test {
+        + compareTo()
+    }
+  }
+  
+
+  Classes.Client .up.|> java.io.Serializable
+  Classes.Client o-- Classes.Enums.Enums.Status : status
+  Classes.DisposeBucket .up.|> java.io.Serializable
+  Classes.Transaction .up.|> java.io.Serializable
+  Classes.User .up.|> java.io.Serializable
+  Classes.User o-- Classes.Enums.Enums.Permission : permission
+  Classes.WithdrawBucket .up.|> java.io.Serializable
+  Classes.test .up.|> java.lang.Comparable
+
+
+@enduml

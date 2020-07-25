@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.itextpdf:itext-xtra:5.5.10" type="repository">
+    <properties maven-id="com.itextpdf:itext-xtra:5.5.10" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/itext-xtra-5.5.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-imaging-1.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

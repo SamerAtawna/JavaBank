@@ -1,0 +1,46 @@
+@startuml
+
+title __SERVER's Class Diagram__\n
+
+  namespace Server {
+    class Server.Server {
+        {static} + main()
+    }
+  }
+  
+
+  namespace Server {
+    class Server.ServerThread {
+        {static} # sockets : List<Socket>
+        - client : Socket
+        {static} - connectionList : Map<Socket, ObjectOutputStream>
+        - reader : ObjectInputStream
+        - writer : ObjectOutputStream
+        + ServerThread()
+        + run()
+    }
+  }
+    namespace Server {
+      namespace Database {
+        class Server.Database.DB {
+            ~ con : Connection
+            + DB()
+            + atmAuth()
+            + authenticate()
+            + createNewAccount()
+            + disponse()
+            + getClients()
+            + getTransactions()
+            + getUsers()
+            + withdraw()
+        }
+      }
+    }
+
+
+
+
+  Server.ServerThread o-- Server.Database.DB : dataBase
+
+
+@enduml

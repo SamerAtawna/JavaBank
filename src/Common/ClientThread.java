@@ -50,8 +50,9 @@ public class ClientThread extends Thread  {
                     System.out.println("ALL_CLIENS ClientThread");
                     ArrayList<Client> allClients = (ArrayList<Client>) rsp.getContent();
                     System.out.println(allClients.size());
-                    ClientsTable.getInstance().setData(allClients);
+//                    ClientsTable.getInstance().setData(allClients);
                     com.bank.GUI.Components.State.getInstance().setClients(allClients);
+                    com.bank.GUI.Components.State.getInstance().setClientsNumber(allClients.size());
                 }
 
                 if (rsp.getType().equals(Enums.ResponseType.CREATE_ACCOUNT)) {
@@ -59,7 +60,11 @@ public class ClientThread extends Thread  {
                     this.getClients();
 
                 }
+                if (rsp.getType().equals(Enums.ResponseType.NEW_USER)) {
+                    JOptionPane.showMessageDialog(null,"  המשתמש נוצר בהצלחה","הודעה", JOptionPane.INFORMATION_MESSAGE);
+                    this.getClients();
 
+                }
                 if (rsp.getType().equals(Enums.ResponseType.DISPOSE)) {
                     JOptionPane.showMessageDialog(null,"  הפקדה בוצעה","הודעה", JOptionPane.INFORMATION_MESSAGE);
                     this.getClients();
@@ -77,6 +82,8 @@ public class ClientThread extends Thread  {
                     System.out.println("ALL_CLIENS ClientThread");
                     ArrayList<Transaction> transList = (ArrayList<Transaction>) rsp.getContent();
                     Transactions.getInstance().setTransData(transList);
+                    //store selected user transaction data on state
+                    com.bank.GUI.Components.State.getInstance().setTransList(transList);
                 }
 
             }
@@ -84,6 +91,8 @@ public class ClientThread extends Thread  {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -103,6 +112,17 @@ public class ClientThread extends Thread  {
     }
     public void createAccount(String name, Integer ID, Integer accountNum, float balance, Enums.Status status, Integer cardCode) throws IOException {
         this.cnt.createAccount(name,ID,accountNum,balance,status,cardCode);
+    }
+
+    public void createUser(String userName, String password, String permission) throws IOException {
+
+            System.out.println("Creating user... username:"+userName+" pass : "+password+" permissin "+permission);
+
+        switch (permission){
+            case "Admin": this.cnt.createUser(new User(userName, password, Enums.Permission.ADMIN));
+            break;
+            case "User": this.cnt.createUser(new User(userName, password, Enums.Permission.USER));
+        }
     }
 
     public static ClientThread getInstance() throws IOException {

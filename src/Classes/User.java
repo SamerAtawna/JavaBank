@@ -16,7 +16,11 @@ public class User implements Serializable {
         this.permission = permission;
         this.password = password;
     }
-
+    public User(String userName, String password, Enums.Permission permission) {
+        this.userName = userName;
+        this.permission = permission;
+        this.password = password;
+    }
     public User(String userName){
         this.userName = userName;
     }
@@ -43,6 +47,16 @@ public class User implements Serializable {
 
     public void setPermission(Enums.Permission permission) {
         this.permission = permission;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", lastLogin='" + lastLogin + '\'' +
+                ", permission=" + permission +
+                '}';
     }
 
     public String getPassword() {
