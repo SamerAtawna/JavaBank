@@ -45,6 +45,7 @@ public class Top extends JPanel {
         this.currUser = currUser;
         this.loggedUsername.setText(currUser.getUserName());
         this.permission.setText(this.currUser.getPermission().toString());
+        this.setBackground(Color.white);
         currencies.forEach(c -> {
             if (c.getCountry().equals("USD") ||
                     c.getCountry().equals("JPY") ||

@@ -18,6 +18,7 @@ public class State {
     public  JTextField withDrawRef;
     int transClient;
     User loggedUser;
+    ClientsTable clientsTableRef;
 
     public String getSelectedClient() {
         return selectedClient;
@@ -28,6 +29,15 @@ public class State {
     }
 
     String selectedClient;
+
+    public ClientsTable getClientsTableRef() {
+        return clientsTableRef;
+    }
+
+    public void setClientsTableRef(ClientsTable clientsTableRef) {
+        this.clientsTableRef = clientsTableRef;
+    }
+
     ArrayList<Transaction> transList;
 
     public ArrayList<Transaction> getTransList() {

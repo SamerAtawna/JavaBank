@@ -53,6 +53,8 @@ public class ClientThread extends Thread  {
 //                    ClientsTable.getInstance().setData(allClients);
                     com.bank.GUI.Components.State.getInstance().setClients(allClients);
                     com.bank.GUI.Components.State.getInstance().setClientsNumber(allClients.size());
+                    com.bank.GUI.Components.State.getInstance().getClientsTableRef().getNewData();
+
                 }
 
                 if (rsp.getType().equals(Enums.ResponseType.CREATE_ACCOUNT)) {

@@ -32,6 +32,7 @@ public class Center_Clients extends JPanel {
     Center_Clients() throws IOException, InterruptedException {
 
         this.clientThread = clientThread;
+        State.getInstance().setClientsTableRef(clientsTable);
         this.setLayout(new BoxLayout (this, BoxLayout.Y_AXIS));
         numClientsPanel.add(numOfClientsLabel);
         numClientsPanel.add(clientsNum);
@@ -41,7 +42,8 @@ public class Center_Clients extends JPanel {
         topPanel.add(numClientsPanel);
         topPanel.add(searchPanel);
         this.add(topPanel);
-
+        ClientThread.getInstance().getClients();
+        clientsTable.getNewData();
         this.add(clientsTable);
         Timer timer = new Timer(2000, new ActionListener() {
             @Override

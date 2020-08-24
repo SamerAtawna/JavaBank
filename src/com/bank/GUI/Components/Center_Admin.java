@@ -3,11 +3,11 @@ package com.bank.GUI.Components;
 import Common.ClientThread;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInput;
 import java.io.IOException;
 
 public class Center_Admin extends JPanel {
@@ -29,7 +29,8 @@ public class Center_Admin extends JPanel {
     JPanel createUserPanel = new JPanel(new GridBagLayout());
     GridBagConstraints gbc = new GridBagConstraints();
     JLabel space = new JLabel("");
-
+    JTextField userToDelete = new JTextField();
+    JButton delUserBtn = new JButton("מחק משתמש");
     Center_Admin() throws IOException {
 
         this.setLayout(new GridLayout(2, 2));
@@ -66,9 +67,11 @@ public class Center_Admin extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 3;
         createUserPanel.add(space, gbc);
-
+        userToDelete.setPreferredSize(new Dimension(100,30));
         deleteUserPanel.setBorder(deleteUserBorder);
-        deleteUserPanel.add(clientTable);
+        deleteUserPanel.setPreferredSize(new Dimension(300, 200));
+        deleteUserPanel.add(userToDelete);
+        deleteUserPanel.add(delUserBtn);
         this.add(createUserPanel);
         this.add(deleteUserPanel);
         createButton.addActionListener(new ActionListener() {

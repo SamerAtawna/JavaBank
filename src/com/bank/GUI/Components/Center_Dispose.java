@@ -38,6 +38,7 @@ public class Center_Dispose  extends JPanel {
                         return;
                     }
                     ClientThread.getInstance().dispose(clientTextField.getText(),Float.parseFloat(withdrawTextField.getText()));
+
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
