@@ -1,3 +1,4 @@
 # JavaBank
 Java Bank application , final project.
-![alt text](http://url/to/img.png)
+<br>
+![alt text](https://github.com/SamerAtawna/JavaBank/blob/master/proj.png)
